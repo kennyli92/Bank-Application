@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bankapp.Profile;
-
 import java.io.RandomAccessFile;
-import java.util.List;
 import java.util.ArrayList;
+
 
 /**
  * Servlet implementation class Startup
@@ -21,13 +19,11 @@ import java.util.ArrayList;
 @WebServlet("/Startup")
 public class Startup extends HttpServlet {
 	private static final long serialVersionUID = 1L;    
-	public static List<Profile> profiles;
-	public static RandomAccessFile profileObjects;
     /**
      * @see HttpServlet#HttpServlet()
      */
 	public void init() throws ServletException {
-		profiles = new ArrayList<Profile>();
+		Global.gProfiles = new ArrayList<Profile>();
 		String tempProfileLine = "default";
 		String[] profileTokens;
 		String accName;
@@ -37,21 +33,21 @@ public class Startup extends HttpServlet {
 		
 		try {
 			System.out.println("1");
-			profileObjects = new RandomAccessFile("profiles.txt", "rw");
+			Global.gProfileObjects = new RandomAccessFile("profiles.txt", "rw");
 			System.out.println("2");
-			profileObjects.seek(0);
-			System.out.println(Long.toString(profileObjects.length()));
-			while((tempProfileLine = profileObjects.readLine()) != null){
+			Global.gProfileObjects.seek(0);
+			System.out.println(Long.toString(Global.gProfileObjects.length()));
+			while((tempProfileLine = Global.gProfileObjects.readLine()) != null){
 				System.out.println(tempProfileLine);
 				System.out.println("3");
 				profileTokens = tempProfileLine.split(",");
-				profiles.add(new Profile(profileTokens[0], Integer.parseInt(profileTokens[1])));
+				Global.gProfiles.add(new Profile(profileTokens[0], Integer.parseInt(profileTokens[1])));
 				
-				for(int i = 2; i < profiles.size(); i += 3){
+				for(int i = 2; i < Global.gProfiles.size(); i += 3){
 					accName = profileTokens[i];
 					accType = BankAccountType.valueOf(profileTokens[i+1]);
 					accBal = Double.parseDouble(profileTokens[i+2]);
-					profiles.get(lineNum).addBankAcc(new BankAccount(accName, accType, accBal));
+					Global.gProfiles.get(lineNum).addBankAcc(new BankAccount(accName, accType, accBal));
 				}
 				lineNum++;
 			}

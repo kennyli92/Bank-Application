@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public static String gUsername;
-    public static Profile gProfile;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,11 +32,11 @@ public class Login extends HttpServlet {
 
 		      PrintWriter out = response.getWriter();
 		      String username = request.getParameter("username");
-		      gUsername = username;
+		      Global.gUsername = username;
 		      //find profile of user and create global Profile object
-		      for(int i = 0; i < Startup.profiles.size(); i++){
-		    	  if((tempProfile = Startup.profiles.get(i)).getUsername().equals(gUsername)){
-		    		  gProfile = tempProfile;
+		      for(int i = 0; i < Global.gProfiles.size(); i++){
+		    	  if((tempProfile = Global.gProfiles.get(i)).getUsername().equals(Global.gUsername)){
+		    		  Global.gProfile = tempProfile;
 		    		  break;
 		    	  }
 		      }
