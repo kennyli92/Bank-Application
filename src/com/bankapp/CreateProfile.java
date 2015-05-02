@@ -54,9 +54,9 @@ public class CreateProfile extends HttpServlet {
                 
                 
 				"<li><form action=\"AddAccount\" method=\"GET\">" +
-				"Account Name <input type=\"text\" name=\"addName\"><br>" +
+				"Account Name <input type=\"text\" name=\"accName\"><br>" +
 				"Account Type: <Select name=\"accType\">" +
-				"<option selected>Checking<option>Saving<option>CD</select><br>" + 
+				"<option selected>CHECKING<option>SAVING<option>CD</select><br>" + 
 				"<input type=\"submit\" value=\"Add Account\" />"
 				+ "</form></li><br>" +
 				
