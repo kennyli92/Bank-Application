@@ -26,9 +26,13 @@ public class BankAccount {
 		return type;
 	}
 	
-	public void transferFund(double amount, BankAccount receiver){
+	public boolean transferFund(double amount, BankAccount receiver){
+		if(this.balance < amount){
+			return false;
+		}
 		this.balance -= amount;
 		receiver.addBalance(amount);
+		return true;
 		//update randomAccessFile
 	}
 	

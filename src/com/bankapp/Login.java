@@ -31,6 +31,7 @@ public class Login extends HttpServlet {
 		
 		response.setContentType("text/html");
 		String docType = "<!DOCTYPE html>\n";
+		String htmlSelectAccName = null;
 		String title = null;
 		boolean matchFlag = false;
 		      PrintWriter out = response.getWriter();
@@ -49,6 +50,15 @@ public class Login extends HttpServlet {
 		      }
 		      if(matchFlag){
 				  title = "Welcome " + Global.gUsername + "!";
+				  for(int i = 0; i < Global.gProfile.getBankAccNum(); i++){
+					  if(i == 0){
+						  htmlSelectAccName = "<option selected>" + Global.gProfile.getBankAcc(i).getName();
+						  continue;
+					  }
+					  htmlSelectAccName += "<option>" + Global.gProfile.getBankAcc(i).getName();
+				  }
+				  
+				  
 			      out.println(docType +
 			                "<html>\n" +
 			                "<head><title>" + title + "</title></head>\n" +
@@ -57,9 +67,11 @@ public class Login extends HttpServlet {
 			                "<ul>\n" +
 			                
 			                "<li><form action=\"Transfer\" method=\"GET\">" +
-			                "From: Account Name <input type=\"text\" name=\"fromName\">" +
+			                "From: Account Name <Select name=\"fromName\">" +
+			                htmlSelectAccName + "</select><br>" +
 			                " Money Amount <input type=\"text\" name=\"fromAmount\"><br>" + 
-			                "To: Account Name <input type=\"text\" name=\"toName\"><br>" +
+			                "To: Account Name <Select name=\"toName\"><br>" +
+			                htmlSelectAccName + "</select><br>" +
 			                "<input type=\"submit\" value=\"Transfer Fund\" />"
 			                + "</form></li><br>" +
 			                
@@ -72,7 +84,8 @@ public class Login extends HttpServlet {
 							+ "</form></li><br>" +
 							
 							"<li><form action=\"DeleteAccount\" method=\"GET\">" +
-							"Account Name <input type=\"text\" name=\"delName\"><br>" +
+							"Account Name <Select name=\"delName\"><br>" +
+							htmlSelectAccName + "</select><br>" +
 							"<input type=\"submit\" value=\"Delete Account\" />"
 							+ "</form></li><br>" +
 							
