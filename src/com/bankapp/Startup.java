@@ -42,14 +42,11 @@ public class Startup extends HttpServlet {
 				
 				Global.gProfiles.add(new Profile(profileTokens[0], Integer.parseInt(profileTokens[1])));
 				
-				for(int i = 2; i < Global.gProfiles.size(); i += 3){
+				for(int i = 2; i < profileTokens.length; i += 3){
 					accName = profileTokens[i];
 					accType = BankAccountType.valueOf(profileTokens[i+1]);
 					accBal = Double.parseDouble(profileTokens[i+2]);
 					Global.gProfiles.get(lineNum).addBankAcc(new BankAccount(accName, accType, accBal));
-					System.out.println(accName);
-					System.out.println(accType);
-					System.out.println(accBal);
 				}
 				lineNum++;
 			}

@@ -76,6 +76,10 @@ public class Login extends HttpServlet {
 						"<input type=\"submit\" value=\"View Account Balances\" />"
 						+ "</form></li><br>" +
 						
+						"<li><form action=\"SumBalance\" method=\"GET\">" +
+						"<input type=\"submit\" value=\"View Sum Account Balance\" />"
+						+ "</form></li><br>" +
+						
 						"<li><form action=\"History\" method=\"GET\">" +
 						"<input type=\"submit\" value=\"View History\" />"
 						+ "</form></li><br>" +
