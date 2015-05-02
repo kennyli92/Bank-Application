@@ -44,6 +44,9 @@ public class Login extends HttpServlet {
 		    		  break;
 		    	  }
 		      }
+		      if(username.equals("")){
+		    	  matchFlag = false;
+		      }
 		      if(matchFlag){
 				  title = "Welcome " + Global.gUsername + "!";
 			      out.println(docType +

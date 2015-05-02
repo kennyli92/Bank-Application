@@ -18,7 +18,7 @@ public class BankAccount {
 		return balance;
 	}
 	
-	public void addBalance(int amount) {
+	public void addBalance(double amount) {
 		balance += amount;
 	}
 	
@@ -26,7 +26,7 @@ public class BankAccount {
 		return type;
 	}
 	
-	public void transferFund(int amount, BankAccount receiver){
+	public void transferFund(double amount, BankAccount receiver){
 		this.balance -= amount;
 		receiver.addBalance(amount);
 		//update randomAccessFile
