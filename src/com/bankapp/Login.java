@@ -28,10 +28,12 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {   
 		Profile tempProfile;
+		
 		response.setContentType("text/html");
 
 		      PrintWriter out = response.getWriter();
 		      String username = request.getParameter("username");
+		      System.out.println(username);
 		      Global.gUsername = username;
 		      //find profile of user and create global Profile object
 		      for(int i = 0; i < Global.gProfiles.size(); i++){
@@ -41,7 +43,7 @@ public class Login extends HttpServlet {
 		    	  }
 		      }
 		      
-			  String title = "Welcome " + username + "!";
+			  String title = "Welcome " + Global.gUsername + "!";
 		      String docType = "<!DOCTYPE html>\n";
 		      out.println(docType +
 		                "<html>\n" +

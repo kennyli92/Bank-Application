@@ -32,15 +32,14 @@ public class Startup extends HttpServlet {
 		int lineNum = 0;
 		
 		try {
-			System.out.println("1");
-			Global.gProfileObjects = new RandomAccessFile("profiles.txt", "rw");
-			System.out.println("2");
+			Global.gProfileObjects = new RandomAccessFile("C:\\Users\\Kenny Li\\Documents\\Bank_Application\\src\\com\\bankapp\\profiles.txt", "rw");
 			Global.gProfileObjects.seek(0);
-			System.out.println(Long.toString(Global.gProfileObjects.length()));
+		
 			while((tempProfileLine = Global.gProfileObjects.readLine()) != null){
 				System.out.println(tempProfileLine);
-				System.out.println("3");
+
 				profileTokens = tempProfileLine.split(",");
+				
 				Global.gProfiles.add(new Profile(profileTokens[0], Integer.parseInt(profileTokens[1])));
 				
 				for(int i = 2; i < Global.gProfiles.size(); i += 3){
@@ -48,6 +47,9 @@ public class Startup extends HttpServlet {
 					accType = BankAccountType.valueOf(profileTokens[i+1]);
 					accBal = Double.parseDouble(profileTokens[i+2]);
 					Global.gProfiles.get(lineNum).addBankAcc(new BankAccount(accName, accType, accBal));
+					System.out.println(accName);
+					System.out.println(accType);
+					System.out.println(accBal);
 				}
 				lineNum++;
 			}
