@@ -39,7 +39,7 @@ public class Logout extends HttpServlet {
 	        "<head><title>" + title + "</title></head>\n" +
 	        "<body bgcolor=\"#f0f0f0\">\n" +
 	        "<h1 align=\"center\">" + title + "</h1>\n" +
-	        "<form action=\"login.html\" method=\"GET\">" +
+	        "<form action=\"index.html\" method=\"GET\">" +
 			"<input type=\"submit\" value=\"Back to login page.\" />"
 			+ "</form></body></html>"
 	    );//end out.println

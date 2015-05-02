@@ -1,1 +1,2 @@
 ktl,1,kenny,CHECKING,100.00,dai,SAVING,200.00
+dai,2,jimmy,SAVING,10000.00
