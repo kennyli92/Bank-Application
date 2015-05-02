@@ -112,7 +112,7 @@ public class Transfer extends HttpServlet {
 		
 		transferSuccess = fromAcc.transferFund(fromAmount, toAcc);
 		if(transferSuccess){
-			Global.gHistory.addTransferHistory(fromAcc.getName(), toAcc.getName(), fromAmount);
+			Global.gHistory.addTransferHistory(Global.gUsername, fromAcc.getName(), toAcc.getName(), fromAmount);
 			
 			title = "Welcome " + Global.gUsername + "!";
 			out.println(docType +

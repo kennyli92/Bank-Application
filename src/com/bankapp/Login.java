@@ -43,6 +43,7 @@ public class Login extends HttpServlet {
 		if(cookies == null){
 			//Add cookie here
 		    Cookie sessionName = new Cookie("username", username);
+		    sessionName.setMaxAge(60*15);
 		    response.addCookie(sessionName);
 		}else{
 			for(int i = 0; i < cookies.length; i++){

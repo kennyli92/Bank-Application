@@ -103,7 +103,7 @@ public class AddAccount extends HttpServlet {
 		}else{
 			//create new bank acc and add to gProfile
 			Global.gProfile.addBankAcc(new BankAccount(accName, accType, 0.0));
-			Global.gHistory.addAddAccHistory(accName, accType.toString());
+			Global.gHistory.addAddAccHistory(Global.gUsername, accName, accType.toString());
 			
 			for(int i = 0; i < Global.gProfile.getBankAccNum(); i++){
 				  if(i == 0){

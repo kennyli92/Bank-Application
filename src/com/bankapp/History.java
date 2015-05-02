@@ -33,7 +33,7 @@ public class History extends HttpServlet {
 		String docType = "<!DOCTYPE html>\n";
 		String title = "History of Account Changes";
 		PrintWriter out = response.getWriter();
-		String history = Global.gHistory.viewHistory();
+		String history = Global.gHistory.viewHistory(Global.gUsername);
 		
 		out.println(docType +
 		        "<html>\n" +

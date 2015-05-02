@@ -55,7 +55,7 @@ public class DeleteAccount extends HttpServlet {
 		  }
 		  
 		  if(removeBankAccSuccess){
-			  Global.gHistory.addDelAccHistory(delName, delAccType);
+			  Global.gHistory.addDelAccHistory(Global.gUsername, delName, delAccType);
 		      out.println(docType +
 		                "<html>\n" +
 		                "<head><title>" + title + "</title></head>\n" +
