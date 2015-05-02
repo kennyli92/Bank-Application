@@ -24,6 +24,7 @@ public class Startup extends HttpServlet {
      */
 	public void init() throws ServletException {
 		Global.gProfiles = new ArrayList<Profile>();
+		Global.gHistory = new HistoryRecord();
 		String tempProfileLine = "default";
 		String[] profileTokens;
 		String accName;

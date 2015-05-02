@@ -42,6 +42,14 @@ public class AddAccount extends HttpServlet {
 				matchFlag = true;
 			}
 		}
+		String htmlSelectAccName = null;
+		for(int i = 0; i < Global.gProfile.getBankAccNum(); i++){
+			  if(i == 0){
+				  htmlSelectAccName = "<option selected>" + Global.gProfile.getBankAcc(i).getName();
+				  continue;
+			  }
+			  htmlSelectAccName += "<option>" + Global.gProfile.getBankAcc(i).getName();
+		  }
 		if(matchFlag){
 			out.println(docType +
 	                "<html>\n" +
@@ -52,14 +60,16 @@ public class AddAccount extends HttpServlet {
 	                
 	                "<ul>\n" +
 	                
-	                "<li><form action=\"Transfer\" method=\"GET\">" +
-	                "From: Account Name <input type=\"text\" name=\"fromName\">" +
-	                " Money Amount <input type=\"text\" name=\"fromAmount\"><br>" + 
-	                "To: Account Name <input type=\"text\" name=\"toName\"><br>" +
-	                "<input type=\"submit\" value=\"Transfer Fund\" />"
-	                + "</form></li><br>" +
-	                
-	                
+					"<li><form action=\"Transfer\" method=\"GET\">" +
+					"From: Account Name <Select name=\"fromName\">" +
+					htmlSelectAccName + "</select><br>" +
+					" Money Amount <input type=\"text\" name=\"fromAmount\"><br>" + 
+					"To: Account Name <Select name=\"toName\"><br>" +
+					htmlSelectAccName + "</select><br>" +
+					"<input type=\"submit\" value=\"Transfer Fund\" />"
+					+ "</form></li><br>" +
+					
+					
 					"<li><form action=\"AddAccount\" method=\"GET\">" +
 					"Account Name <input type=\"text\" name=\"accName\"><br>" +
 					"Account Type: <Select name=\"accType\">" +
@@ -68,7 +78,8 @@ public class AddAccount extends HttpServlet {
 					+ "</form></li><br>" +
 					
 					"<li><form action=\"DeleteAccount\" method=\"GET\">" +
-					"Account Name <input type=\"text\" name=\"delName\"><br>" +
+					"Account Name <Select name=\"delName\"><br>" +
+					htmlSelectAccName + "</select><br>" +
 					"<input type=\"submit\" value=\"Delete Account\" />"
 					+ "</form></li><br>" +
 					
@@ -87,12 +98,20 @@ public class AddAccount extends HttpServlet {
 					"<li><form action=\"Logout\" method=\"GET\">" +
 					"<input type=\"submit\" value=\"Logout\" />"
 					+ "</form></li>" +
-	                "</ul>\n" +
-	                "</body></html>");
+					"</ul>\n" +
+					"</body></html>");
 		}else{
 			//create new bank acc and add to gProfile
 			Global.gProfile.addBankAcc(new BankAccount(accName, accType, 0.0));
+			Global.gHistory.addAddAccHistory(accName, accType.toString());
 			
+			for(int i = 0; i < Global.gProfile.getBankAccNum(); i++){
+				  if(i == 0){
+					  htmlSelectAccName = "<option selected>" + Global.gProfile.getBankAcc(i).getName();
+					  continue;
+				  }
+				  htmlSelectAccName += "<option>" + Global.gProfile.getBankAcc(i).getName();
+			  }
 			out.println(docType +
 	                "<html>\n" +
 	                "<head><title>" + title + "</title></head>\n" +
@@ -102,14 +121,16 @@ public class AddAccount extends HttpServlet {
 	                
 	                "<ul>\n" +
 	                
-	                "<li><form action=\"Transfer\" method=\"GET\">" +
-	                "From: Account Name <input type=\"text\" name=\"fromName\">" +
-	                " Money Amount <input type=\"text\" name=\"fromAmount\"><br>" + 
-	                "To: Account Name <input type=\"text\" name=\"toName\"><br>" +
-	                "<input type=\"submit\" value=\"Transfer Fund\" />"
-	                + "</form></li><br>" +
-	                
-	                
+					"<li><form action=\"Transfer\" method=\"GET\">" +
+					"From: Account Name <Select name=\"fromName\">" +
+					htmlSelectAccName + "</select><br>" +
+					" Money Amount <input type=\"text\" name=\"fromAmount\"><br>" + 
+					"To: Account Name <Select name=\"toName\"><br>" +
+					htmlSelectAccName + "</select><br>" +
+					"<input type=\"submit\" value=\"Transfer Fund\" />"
+					+ "</form></li><br>" +
+					
+					
 					"<li><form action=\"AddAccount\" method=\"GET\">" +
 					"Account Name <input type=\"text\" name=\"accName\"><br>" +
 					"Account Type: <Select name=\"accType\">" +
@@ -118,7 +139,8 @@ public class AddAccount extends HttpServlet {
 					+ "</form></li><br>" +
 					
 					"<li><form action=\"DeleteAccount\" method=\"GET\">" +
-					"Account Name <input type=\"text\" name=\"delName\"><br>" +
+					"Account Name <Select name=\"delName\"><br>" +
+					htmlSelectAccName + "</select><br>" +
 					"<input type=\"submit\" value=\"Delete Account\" />"
 					+ "</form></li><br>" +
 					
@@ -137,8 +159,8 @@ public class AddAccount extends HttpServlet {
 					"<li><form action=\"Logout\" method=\"GET\">" +
 					"<input type=\"submit\" value=\"Logout\" />"
 					+ "</form></li>" +
-	                "</ul>\n" +
-	                "</body></html>");
+					"</ul>\n" +
+					"</body></html>");
 		}
 	}
 

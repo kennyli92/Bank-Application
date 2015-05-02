@@ -30,6 +30,7 @@ public class DeleteAccount extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String delName = request.getParameter("delName");
+		String delAccType = null;
 		boolean removeBankAccSuccess =  false;
 		response.setContentType("text/html");
 		String docType = "<!DOCTYPE html>\n";
@@ -39,6 +40,7 @@ public class DeleteAccount extends HttpServlet {
 		
 		for(int i = 0; i < Global.gProfile.getBankAccNum(); i++){
 			if(Global.gProfile.getBankAcc(i).getName().equals(delName)){
+				delAccType = Global.gProfile.getBankAcc(i).getType().toString();
 				removeBankAccSuccess = Global.gProfile.removeBankAcc(Global.gProfile.getBankAcc(i));
 			}
 		}
@@ -53,6 +55,7 @@ public class DeleteAccount extends HttpServlet {
 		  }
 		  
 		  if(removeBankAccSuccess){
+			  Global.gHistory.addDelAccHistory(delName, delAccType);
 		      out.println(docType +
 		                "<html>\n" +
 		                "<head><title>" + title + "</title></head>\n" +
