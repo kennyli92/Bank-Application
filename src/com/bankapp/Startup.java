@@ -25,15 +25,22 @@ public class Startup extends HttpServlet {
 	public void init() throws ServletException {
 		Global.gProfiles = new ArrayList<Profile>();
 		Global.gHistory = new HistoryRecord();
-		String tempProfileLine = "default";
+		String tempProfileLine = null;
+		String tempHistoryLine = null;
 		String[] profileTokens;
+		String[] historyTokens;
 		String accName;
 		BankAccountType accType;
 		double accBal;
 		int lineNum = 0;
 		
 		try {
+			//put profiles.txt data into Global variable gProfileObjects
 			Global.gProfileObjects = new RandomAccessFile("C:\\Users\\Kenny Li\\Documents\\Bank_Application\\src\\com\\bankapp\\profiles.txt", "rw");
+			Global.gProfileObjects.seek(0);
+			
+			//put history.txt data into Global variable gHistoryObjects
+			Global.gProfileObjects = new RandomAccessFile("C:\\Users\\Kenny Li\\Documents\\Bank_Application\\src\\com\\bankapp\\history.txt", "rw");
 			Global.gProfileObjects.seek(0);
 		
 			while((tempProfileLine = Global.gProfileObjects.readLine()) != null){
@@ -50,7 +57,15 @@ public class Startup extends HttpServlet {
 					Global.gProfiles.get(lineNum).addBankAcc(new BankAccount(accName, accType, accBal));
 				}
 				lineNum++;
+			}//end reading profiles.txt
+			
+			lineNum = 0;
+			while((tempHistoryLine = Global.gHistoryObjects.readLine()) != null){
+				historyTokens = tempHistoryLine.split(",");
+				Global.gHistory.addHistory(historyTokens[0], historyTokens[1]);
+				lineNum++;
 			}
+			
 			//profileObjects.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

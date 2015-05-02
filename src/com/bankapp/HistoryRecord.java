@@ -27,6 +27,11 @@ public class HistoryRecord {
 		historyList.add(new String("Deleted Account: " + accName + " of " + accType + " type."));
 	}
 	
+	public void addHistory(String user, String history){
+		userList.add(new String(user));
+		historyList.add(new String(history));
+	}
+	
 	public String viewHistory(String user){
 		String history = "";
 		for(int i = 0; i < historyList.size(); i++){
