@@ -36,11 +36,11 @@ public class Startup extends HttpServlet {
 		
 		try {
 			//put profiles.txt data into Global variable gProfileObjects
-			Global.gProfileObjects = new RandomAccessFile("C:\\Users\\Kenny Li\\Documents\\Bank_Application\\src\\com\\bankapp\\profiles.txt", "rw");
+			Global.gProfileObjects = new RandomAccessFile("profiles.txt", "rw");
 			Global.gProfileObjects.seek(0);
 			
 			//put history.txt data into Global variable gHistoryObjects
-			Global.gHistoryObjects = new RandomAccessFile("C:\\Users\\Kenny Li\\Documents\\Bank_Application\\src\\com\\bankapp\\history.txt", "rw");
+			Global.gHistoryObjects = new RandomAccessFile("history.txt", "rw");
 			Global.gHistoryObjects.seek(0);
 		
 			while((tempProfileLine = Global.gProfileObjects.readLine()) != null){

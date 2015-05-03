@@ -43,6 +43,7 @@ public class SumBalance extends HttpServlet {
 		        "<h1 align=\"center\">" + title + "</h1>\n" +
 		        "<ul>\n" + "Sum Account Balance: " + sumBalance
 		    	+ "</ul>\n"
+		    	+ "<FORM> <INPUT Type=\"button\" VALUE=\"Back\" onClick=\"history.go(-1);return true;\"></FORM>"
 		        + "</body></html>"
 		    );//end out.println
 	}

@@ -2,6 +2,7 @@ package com.bankapp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,9 @@ public class CreateProfile extends HttpServlet {
 		// TODO Auto-generated method stub
 		int uid = Global.gProfiles.size() + 1;
 		String profileName = request.getParameter("newUsername");
-		Global.gProfiles.add(new Profile(profileName, uid));
+		Profile curProfile = new Profile(profileName,uid);
+		Global.gProfiles.add(curProfile);
+		boolean sameUserFlag =  false;
 		
 		//Check if cookie exist
 		Cookie[] cookies = request.getCookies();
@@ -50,10 +53,26 @@ public class CreateProfile extends HttpServlet {
 				}
 			}
 		}
+		
+		if(Global.gProfileObjects == null){
+	    	 Global.gProfileObjects = new RandomAccessFile("profiles.txt", "rw");
+	    	 Global.gProfileObjects.seek(0);
+	     }
+	     if(Global.gHistoryObjects == null){
+	    	 Global.gHistoryObjects = new RandomAccessFile("history.txt", "rw");
+	    	 Global.gHistoryObjects.seek(0);
+	     }
 			
 		Global.gUsername = profileName;
+		Global.gProfile = curProfile;
 		
-		if(profileName.equals("")){
+		for(int i = 0; i < Global.gProfiles.size(); i++){
+			if(profileName.equals(Global.gProfiles.get(i).getUsername())){
+				sameUserFlag = true;
+			}
+		}
+		
+		if(profileName.equals("") || sameUserFlag){
 			response.sendRedirect("failLogin.html");
 		}else{
 			String htmlSelectAccName = null;

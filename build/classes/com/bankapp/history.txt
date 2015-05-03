@@ -1,0 +1,22 @@
+Jen,Added Account: ken of CHECKING type.
+Jen,Added Account: dai of SAVING type.
+Jen,Added Account: lasega of CD type.
+Jen,Added Account: 1 of CHECKING type.
+Jen,Added Account: 2 of SAVING type.
+Jen,Added Account: 3 of CD type.
+Ken,Added Account: 1 of CHECKING type.
+Ken,Added Account: 2 of CHECKING type.
+Ken,Added Account: 3 of CD type.
+Ken,Added Account: 4 of CD type.
+ken,Added Account: 1 of CHECKING type.
+ken,Added Account: 2 of SAVING type.
+ken,Added Account: 3 of CD type.
+ken,Added Account: 1 of CHECKING type.
+ken,Added Account: 2 of SAVING type.
+ken,Added Account: 3 of CD type.
+ken,Added Account: 1 of CHECKING type.
+ken,Added Account: 2 of SAVING type.
+ken,Added Account:  of CD type.
+dai,Added Account: 4 of CHECKING type.
+dai,Added Account: 5 of CHECKING type.
+dai,Added Account: 6 of CD type.

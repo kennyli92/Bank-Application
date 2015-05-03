@@ -42,6 +42,7 @@ public class History extends HttpServlet {
 		        "<h1 align=\"center\">" + title + "</h1>\n" +
 		        "<ul>\n" + history
 		    	+ "</ul>\n"
+		    	+ "<FORM> <INPUT Type=\"button\" VALUE=\"Back\" onClick=\"history.go(-1);return true;\"></FORM>"
 		        + "</body></html>"
 		    );//end out.println
 		

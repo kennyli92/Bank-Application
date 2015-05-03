@@ -41,4 +41,20 @@ public class HistoryRecord {
 		}
 		return history;
 	}
+	
+	public int getHistorySize(){
+		return historyList.size();
+	}
+	
+	public String getHistoryLine(int lineNum){
+		return historyList.get(lineNum);
+	}
+	
+	public String getUserLine(int lineNum){
+		return userList.get(lineNum);
+	}
+	
+	public int getUserSize(){
+		return userList.size();
+	}
 }

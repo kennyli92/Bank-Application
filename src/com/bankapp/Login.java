@@ -2,6 +2,7 @@ package com.bankapp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.RandomAccessFile;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +30,7 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {   
 		Profile tempProfile;
-		
+		boolean userFoundFlag = false;
 		response.setContentType("text/html");
 		String docType = "<!DOCTYPE html>\n";
 		String htmlSelectAccName = null;
@@ -37,23 +38,39 @@ public class Login extends HttpServlet {
 		boolean matchFlag = false;
 	      PrintWriter out = response.getWriter();
 	      String username = request.getParameter("username");
-	      
-	    //Check if cookie exist
-		Cookie[] cookies = request.getCookies();
-		if(cookies == null){
-			//Add cookie here
-		    Cookie sessionName = new Cookie("username", username);
-		    sessionName.setMaxAge(60*15);
-		    response.addCookie(sessionName);
-		}else{
-			for(int i = 0; i < cookies.length; i++){
-				if(cookies[i].getName().equals("username") && !cookies[i].getValue().equals(username)){
-					response.sendRedirect("cookieExistFailLogin.html");
-					return;
+	     if(Global.gProfileObjects == null){
+	    	 Global.gProfileObjects = new RandomAccessFile("profiles.txt", "rw");
+	    	 Global.gProfileObjects.seek(0);
+	     }
+	     if(Global.gHistoryObjects == null){
+	    	 Global.gHistoryObjects = new RandomAccessFile("history.txt", "rw");
+	    	 Global.gHistoryObjects.seek(0);
+	     }
+	     
+	     for(int i = 0; i < Global.gProfiles.size(); i++){
+	    	  if(username.equals(Global.gProfiles.get(i).getUsername())){
+	    		  userFoundFlag = true;
+	    		  break;
+	    	  }
+	      }
+	    
+	    if(!userFoundFlag){
+		    //Check if cookie exist
+			Cookie[] cookies = request.getCookies();
+			if(cookies == null){
+				//Add cookie here
+			    Cookie sessionName = new Cookie("username", username);
+			    sessionName.setMaxAge(60*15);
+			    response.addCookie(sessionName);
+			}else{
+				for(int i = 0; i < cookies.length; i++){
+					if(cookies[i].getName().equals("username") && !cookies[i].getValue().equals(username)){
+						response.sendRedirect("cookieExistFailLogin.html");
+						return;
+					}
 				}
 			}
-		}
-	      
+	    }
 	      
 	      Global.gUsername = username;
 	      //find profile of user and create global Profile object
@@ -67,6 +84,8 @@ public class Login extends HttpServlet {
 	      if(username.equals("")){
 	    	  matchFlag = false;
 	      }
+	      
+	      
 	      if(matchFlag){
 			  title = "Welcome " + Global.gUsername + "!";
 			  for(int i = 0; i < Global.gProfile.getBankAccNum(); i++){
@@ -125,7 +144,7 @@ public class Login extends HttpServlet {
 						+ "</form></li>" +
 		                "</ul>\n" +
 		                "</body></html>");
-	      }else{
+	      }else if(userFoundFlag || !matchFlag){
 	    	  response.sendRedirect("failLogin.html");
 	      }
 	}

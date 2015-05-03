@@ -100,7 +100,58 @@ public class AddAccount extends HttpServlet {
 					+ "</form></li>" +
 					"</ul>\n" +
 					"</body></html>");
-		}else{
+		}else if(accName.equals("")){
+			out.println(docType +
+	                "<html>\n" +
+	                "<head><title>" + title + "</title></head>\n" +
+	                "<body bgcolor=\"#f0f0f0\">\n" +
+	                "<h1 align=\"center\">" + title + "</h1>\n" +
+	                "<h1 align=\"center\">" + "Error: Empty Account Name!" + "</h1>\n" +
+	                
+	                "<ul>\n" +
+	                
+					"<li><form action=\"Transfer\" method=\"GET\">" +
+					"From: Account Name <Select name=\"fromName\">" +
+					htmlSelectAccName + "</select><br>" +
+					" Money Amount <input type=\"text\" name=\"fromAmount\"><br>" + 
+					"To: Account Name <Select name=\"toName\"><br>" +
+					htmlSelectAccName + "</select><br>" +
+					"<input type=\"submit\" value=\"Transfer Fund\" />"
+					+ "</form></li><br>" +
+					
+					
+					"<li><form action=\"AddAccount\" method=\"GET\">" +
+					"Account Name <input type=\"text\" name=\"accName\"><br>" +
+					"Account Type: <Select name=\"accType\">" +
+					"<option selected>CHECKING<option>SAVING<option>CD</select><br>" + 
+					"<input type=\"submit\" value=\"Add Account\" />"
+					+ "</form></li><br>" +
+					
+					"<li><form action=\"DeleteAccount\" method=\"GET\">" +
+					"Account Name <Select name=\"delName\"><br>" +
+					htmlSelectAccName + "</select><br>" +
+					"<input type=\"submit\" value=\"Delete Account\" />"
+					+ "</form></li><br>" +
+					
+					"<li><form action=\"ViewBalance\" method=\"GET\">" +
+					"<input type=\"submit\" value=\"View Account Balances\" />"
+					+ "</form></li><br>" +
+					
+					"<li><form action=\"SumBalance\" method=\"GET\">" +
+					"<input type=\"submit\" value=\"View Sum Account Balance\" />"
+					+ "</form></li><br>" +
+					
+					"<li><form action=\"History\" method=\"GET\">" +
+					"<input type=\"submit\" value=\"View History\" />"
+					+ "</form></li><br>" +
+					
+					"<li><form action=\"Logout\" method=\"GET\">" +
+					"<input type=\"submit\" value=\"Logout\" />"
+					+ "</form></li>" +
+					"</ul>\n" +
+					"</body></html>");
+		}
+		else{
 			//create new bank acc and add to gProfile
 			Global.gProfile.addBankAcc(new BankAccount(accName, accType, 0.0));
 			Global.gHistory.addAddAccHistory(Global.gUsername, accName, accType.toString());
